@@ -1,0 +1,22 @@
+{
+  "/index.html": {
+    "value": "<html> </html>",
+    "title": "index.html",
+    "file_type": "html"
+  },
+  "/style.css": {
+    "value": "html, body {width:100%, height:100%}",
+    "title": "style.css",
+    "file_type": "css"
+  },
+  "/script.js": {
+    "value": "//some code here",
+    "title": "script.js",
+    "file_type": "js"
+  },
+  "/test.html": {
+    "value": "<html> </html>",
+    "title": "test.html",
+    "file_type": "html"
+  }
+}
