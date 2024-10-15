@@ -100,8 +100,8 @@ export const TreeFolder: React.FC<FolderPropTypes> = ({ items, children, title, 
       </div>
 
       <ul className={`${collapsed ? "collapsed" : ""}`}>
-        {items?.map((item: any) => {
-          return <TreeFile title={item.title} img_src={item.img_src} file_type={item.file_type} />;
+        {items?.map((item: any, index : number) => {
+          return <TreeFile title={item.title} img_src={item.img_src} file_type={item.file_type} key={index} />;
         })}
         {children}
       </ul>

@@ -1,8 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import codeState from "./slices/CodeSlice";
+import explorerState from "./slices/ExplorerSlice";
+
 const store = configureStore({
   reducer: {
-    codeState
+    codeState,
+    explorerState,
 
   },
 });

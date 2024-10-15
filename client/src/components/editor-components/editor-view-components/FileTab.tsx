@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import React, { useState } from "react";
+import React from "react";
 
 const img_uri: { [type: string]: string } = {
   html: "https://img.icons8.com/fluency/48/html-5.png",
@@ -30,7 +30,6 @@ const tabImgStyle = css`
 `;
 
 const FileTab: React.FC<PropTypes> = ({ title, tab_file_type, path }) => {
-  const [ACTIVE_TAB, setActive] = useState(false);
   return (
     <div className="monaco-file-tab align-row clickable" key={path}>
       <div className="center-div">

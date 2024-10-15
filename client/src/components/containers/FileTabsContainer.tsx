@@ -6,7 +6,7 @@ interface PropTypes {
   tabs?: any;
 }
 
-const FileTabsContainer: React.FC<PropTypes> = ({ tabs }) => {
+const FileTabsContainer: React.FC<PropTypes> = () => {
   interface FileStructure {
     [path: string]: {
       value: string;
@@ -17,7 +17,7 @@ const FileTabsContainer: React.FC<PropTypes> = ({ tabs }) => {
   const files: FileStructure = Files;
   const paths: string[] = Object.keys(Files);
   const TABS: any = paths.map((path) => {
-    return <FileTab tab_file_type={files[path].file_type} title={files[path].title} path={path} />;
+    return <FileTab tab_file_type={files[path].file_type} title={files[path].title} path={path} key={path} />;
   });
   return <div className="monaco-file-tabs-container align-row">{TABS}</div>;
 };

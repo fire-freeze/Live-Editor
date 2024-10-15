@@ -4,9 +4,11 @@ body {
   width: 100%;
   padding: 0;
   width: 0;
+  background-color: #030616;
 }
+/* #160202; */
 :root {
-  --file-tab-background: #160202;
+  --file-tab-background: #03001b;
   --explorer-container-background: rgb(1, 4, 9);
   --monaco-common-border: 1px solid rgb(48, 54, 61);
   --monaco-tree-border: 1px solid rgb(45 45 89);
@@ -22,7 +24,6 @@ body {
   height: 100%;
   overflow: hidden;
   /* background-color: #13133b; */
-  background-color: #0a0a30;
 }
 
 .app-container > * {
@@ -70,7 +71,7 @@ body {
   min-width: 3vw;
   min-height: 2em;
   height: 6.5vh;
-  border: var(--monaco-common-border);
+  border-bottom: var(--monaco-common-border);
   background-color: var(--file-tab-background);
 }
 
@@ -180,9 +181,7 @@ body {
   text-overflow: ellipsis;
 }
 
-.monaco-tab-title {
- 
-}
+
 
 .monaco-tab-img > img {
   height: 1.25em;
@@ -220,21 +219,12 @@ body {
   overflow: hidden;
 }
 
-.explorer-options {
- 
-}
 
 .project-title:hover,
 .explorer-options :hover {
   filter: brightness(1.25);
 }
 
-.explorer-option img {
-}
-
-.explorer-details {
-  /* gap: 0.5em; */
-}
 
 .explorer-details:hover {
   background-color: rgb(3 15 35);
@@ -247,7 +237,7 @@ body {
   background-color: transparent;
   position: absolute;
   z-index: 100;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 .context-menu {
