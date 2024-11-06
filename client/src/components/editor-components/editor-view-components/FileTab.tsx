@@ -15,7 +15,28 @@ interface PropTypes {
   path?: string;
 }
 
+const fileTabStyle = css`
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  background-color: transparent;
+  min-width: 5em;
+  color: #cbcbcb;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  gap: 0.25em;
+  width: 150%;
+  width: fit-content;
+  & :hover {  
+    & > .monaco-tab-close {
+      display: flex;
+      background-color:red;
+    }
+  }
+`;
+
 const closeContainerStyle = css`
+  /* display: none; */
   height: 55%;
   border-radius: 5px;
   width: 1.25em;
@@ -31,7 +52,7 @@ const tabImgStyle = css`
 
 const FileTab: React.FC<PropTypes> = ({ title, tab_file_type, path }) => {
   return (
-    <div className="monaco-file-tab align-row clickable" key={path}>
+    <div className="monaco-file-tab align-row clickable" key={path} css={fileTabStyle}>
       <div className="center-div">
         <img src={img_uri[tab_file_type]} css={tabImgStyle} />
       </div>
@@ -40,7 +61,7 @@ const FileTab: React.FC<PropTypes> = ({ title, tab_file_type, path }) => {
       </div>
       <div className="monaco-tab-close center-div clickable">
         <div className="center-div" css={closeContainerStyle}>
-          <img src="https://img.icons8.com/?size=100&id=OZuepOQd0omj&format=png&color=000000" alt="close tab" />
+          <img src="https://img.icons8.com/?size=100&id=NvQ7QXYyF7eO&format=png&color=FFFFFF" alt="close tab" />
         </div>
       </div>
     </div>

@@ -7,8 +7,8 @@ interface ContextProps {
 
 interface StateProps {
   show_modal: boolean;
-  child: ReactNode | null;
-  style: CSSProperties | {};
+  child?: ReactNode;
+  modal_style?: any;
 }
 
 export const modalContext = createContext<ContextProps | undefined>(undefined);
@@ -17,9 +17,9 @@ export const ModalState: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [modalState, setModalState] = useState<StateProps>({
     show_modal: false,
     child: null,
-    style: {},
+    modal_style: {},
   });
-  const updateModalState = (value: StateProps) => setModalState(value);
+  const updateModalState = (value: StateProps) => setModalState({ ...modalState, ...value });
   return (
     <modalContext.Provider
       value={{

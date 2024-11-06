@@ -14,6 +14,7 @@ const CodeSlice = createSlice({
   reducers: {
     setValue(state, { payload }) {
       state.currentValue = payload;
+      console.log(payload)
     },
   },
 });

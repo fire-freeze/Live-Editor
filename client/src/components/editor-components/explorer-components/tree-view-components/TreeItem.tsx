@@ -1,18 +1,18 @@
 import React, { useContext, useState } from "react";
 import { modalContext } from "../../../../context/modalContext";
 import ContextMenu from "../../../modal-components/ContextMenu";
-type IMG_URI_TYPE = "html" | "css" | "js" | "txt";
+type FILE_TYPE = "html" | "css" | "js" | "txt";
 
-const img_uri = {
+const img_uri: { [type: string]: string } = {
   html: "https://img.icons8.com/fluency/48/html-5.png",
   css: "https://img.icons8.com/color/48/css3.png",
-  js: "https://img.icons8.com/color/48/javascript--v1.png",
   txt: "https://img.icons8.com/parakeet/48/txt.png",
+  js: "https://img.icons8.com/color/48/javascript--v1.png",
 };
 interface FilePropTypes {
   title: string;
   children?: React.ReactNode;
-  file_type: IMG_URI_TYPE;
+  file_type?: string;
   img_src?: string;
 }
 
@@ -51,9 +51,10 @@ const ShowContextMenu = (event: React.MouseEvent, modalState: any, updateModalSt
   });
 };
 
-export const TreeFile: React.FC<FilePropTypes> = ({ title, file_type }) => {
+export const TreeFile: React.FC<FilePropTypes> = ({ title }) => {
   const context = useContext(modalContext);
   if (!context) throw new Error("not found");
+  const file_type: string = title.split(".")[1];
   const { modalState, updateModalState } = context;
   return (
     <li>
@@ -100,7 +101,7 @@ export const TreeFolder: React.FC<FolderPropTypes> = ({ items, children, title, 
       </div>
 
       <ul className={`${collapsed ? "collapsed" : ""}`}>
-        {items?.map((item: any, index : number) => {
+        {Object.values(items)?.map((item: any, index: number) => {
           return <TreeFile title={item.title} img_src={item.img_src} file_type={item.file_type} key={index} />;
         })}
         {children}

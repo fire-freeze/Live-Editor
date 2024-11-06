@@ -12,8 +12,9 @@ const ContextMenu: React.FC<PropTypes> = ({ entries, position }) => {
   const menuRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const menuNode = menuRef.current as HTMLElement;
-      if(menuNode.clientHeight + menuNode.getBoundingClientRect().y > window.innerHeight) menuNode.style.top = window.innerHeight - menuNode.clientHeight - 5 + "px";
-  }, [])
+    if (menuNode.clientHeight + menuNode.getBoundingClientRect().y > window.innerHeight)
+      menuNode.style.top = window.innerHeight - menuNode.clientHeight - 5 + "px";
+  }, []);
   return (
     <div
       ref={menuRef}
@@ -26,7 +27,7 @@ const ContextMenu: React.FC<PropTypes> = ({ entries, position }) => {
     >
       {entries.map((item: any, index: number) => {
         return (
-          <div className="context-menu-item clickable" key={index} onClick={(e) => item.action()}>
+          <div className="context-menu-item clickable" key={index} onClick={() => item.action()}>
             <span>{item.label}</span>
           </div>
         );

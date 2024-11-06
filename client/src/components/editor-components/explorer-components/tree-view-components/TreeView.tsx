@@ -18,7 +18,9 @@ const treeViewStyle = css`
 const TreeView: React.FC<PropTypes> = ({ children }) => {
   return (
     <div className="explorer-tree-view" css={treeViewStyle}>
-      <ul>{children}</ul>
+      <ul>{children}
+
+      </ul>
     </div>
   );
 };

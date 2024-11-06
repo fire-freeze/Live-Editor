@@ -7,7 +7,7 @@ import { css } from "@emotion/react";
 import store from "../../store/store";
 import { modalContext } from "../../context/modalContext";
 import CreateTreeItem from "../modal-components/CreateTreeItem";
-import { TreeFolder } from "../editor-components/explorer-components/tree-view-components/TreeItem";
+import { TreeFile, TreeFolder } from "../editor-components/explorer-components/tree-view-components/TreeItem";
 
 interface PropTypes {
   project_title: string;
@@ -27,20 +27,17 @@ const optionsContainerStyle = css`
   padding-right: 0.5em;
 `;
 
-const folder_url: string = "https://img.icons8.com/ios-filled/50/228BE6/folder-invoices--v2.png";
-
 const ExplorerContainer: React.FC<PropTypes> = ({ project_title }) => {
   const context = useContext(modalContext);
   if (!context) throw new Error("not found");
 
   const { modalState, updateModalState } = context;
 
-  const mouseHandler = (event: React.MouseEvent, item_type: string, label: string) => {
+  const mouseHandler = (item_type: string, label: string) => {
     const explorerState = store.getState().explorerState;
     updateModalState({
-      ...modalState,
       show_modal: true,
-      style: {
+      modal_style: {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -49,8 +46,8 @@ const ExplorerContainer: React.FC<PropTypes> = ({ project_title }) => {
     });
   };
 
-  const entries = Array.from(store.getState().explorerState.rootDir.values());
-  console.log(entries)
+  const entries = Array.from(Object.values(store.getState().explorerState.rootDir));
+  console.log(entries);
   return (
     <div className="explorer-container">
       <div className="clickable align-row" css={explorerDetailsStyle}>
@@ -61,19 +58,21 @@ const ExplorerContainer: React.FC<PropTypes> = ({ project_title }) => {
           <ExplorerOption
             label="Add File"
             img_src="https://img.icons8.com/?size=100&id=94127&format=png&color=228BE6"
-            onClick={(event: React.MouseEvent) => mouseHandler(event, "file", "New File")}
+            onClick={(event: React.MouseEvent) => mouseHandler("file", "New File")}
           />
           <ExplorerOption
             label="Add Folder"
             img_src="https://img.icons8.com/ios-filled/50/228BE6/add-folder--v1.png"
-            onClick={(event: React.MouseEvent) => mouseHandler(event, "folder", "New Folder")}
+            onClick={(event: React.MouseEvent) => mouseHandler("folder", "New Folder")}
           />
         </div>
       </div>
-      {/* <TreeView>{entries.map((item ) => {
-        // return <TreeFolder title={item.title} items={item?.items} img_src="" />
-      })}</TreeView> */}
-      {/* <TreeFolder title="components" img_src={folder_url} items={items}></TreeFolder> */}
+      <TreeView>
+        {entries.map((item, index) => {
+          if (item.item_type === "folder") return <TreeFolder title={item.title} items={item?.dirEntries} img_src={item.img_src} key={index} />;
+          if (item.item_type === "file") return <TreeFile title={item.title} img_src={item.img_src} key={index} />;
+        })}
+      </TreeView>
     </div>
   );
 };

@@ -4,7 +4,7 @@ body {
   width: 100%;
   padding: 0;
   width: 0;
-  background-color: #030616;
+  background-color: #0c0d14;
 }
 /* #160202; */
 :root {
@@ -40,6 +40,11 @@ body {
   flex-flow: row;
 }
 
+.full-space {
+  height: 100%;
+  width: 100%;
+}
+
 .center-div {
   display: flex;
   align-items: center;
@@ -49,6 +54,10 @@ body {
 .no-border {
   border: none;
   outline: none;
+}
+
+.common-border {
+  border: var(--monaco-common-border);
 }
 
 .clickable {
@@ -157,16 +166,6 @@ body {
 }
 
 .monaco-file-tab {
-  position: relative;
-  height: 100%;
-  overflow: hidden;
-  background-color: transparent;
-  min-width: 5em;
-  color: #cbcbcb;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  gap: 0.25em;
-  width: fit-content;
   border-right: var(--monaco-common-border);
 }
 
@@ -180,8 +179,6 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-
 
 .monaco-tab-img > img {
   height: 1.25em;
@@ -219,12 +216,10 @@ body {
   overflow: hidden;
 }
 
-
 .project-title:hover,
 .explorer-options :hover {
   filter: brightness(1.25);
 }
-
 
 .explorer-details:hover {
   background-color: rgb(3 15 35);
@@ -241,7 +236,6 @@ body {
 }
 
 .context-menu {
-  background-color: transparent;
   position: absolute;
   align-items: center;
   min-width: 13em;
@@ -262,8 +256,7 @@ body {
   width: 90%;
   border-radius: 5px;
   flex-direction: flex-start;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
 }
 
@@ -298,4 +291,10 @@ body {
 .sash-active,
 .resize-sash:hover {
   background-color: rgb(69, 69, 206);
+}
+
+.common-href-link {
+  color: #4493F8;
+  font-weight: 150;
+  cursor: pointer;
 }

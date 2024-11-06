@@ -1,8 +1,6 @@
 import FilesJSON from "../editor/files.json";
 import { setValue } from "../store/slices/CodeSlice";
 import store from "../store/store";
-console.log("TEST:");
-console.log(FilesJSON);
 interface FileData {
   value: string;
   title: string;
@@ -33,13 +31,11 @@ export default class CodeHandler {
 
   handleCodeChanged(value: string, filePath: string) {
     this.filesData[filePath].value = value;
-    console.log(this.filesData[filePath].value)
     this.setStateCallback(this.filesData[filePath].value);
     this.setStateCallback(value);
     store.dispatch(
       setValue(value),
     );
-    console.log("CODE VALUE CHANGED: ", store.getState().codeState.currentValue);
     //this.setIframeContent(value);
     return;
   }
