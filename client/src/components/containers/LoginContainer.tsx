@@ -28,23 +28,6 @@ const inputStyle = css`
   line-height: 1.5;
   border: 1px solid #444d58;
   font-size: 15px;
-  /* &::before {
-    content: "\f0e0";
-    position: relative;
-    display: inline-block;
-    font: normal normal normal 14px / 1;
-    font-size: 15px;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-  } */
-  &::before {
-    content: "AAA";
-    color: red;
-    font-size: 1em;
-    /* position: relative; */
-    height: 1em;
-    width: 2em;
-  }
 `;
 
 const titleStyle = css`
@@ -87,7 +70,6 @@ const labelStyle = css`
   color: white;
 `;
 
-
 const LoginContainer: React.FC = () => {
   return (
     <main className="center-div full-space align-column">
@@ -102,7 +84,7 @@ const LoginContainer: React.FC = () => {
               <input type="text" id="username" css={inputStyle} spellCheck={false} />
             </div>
             <div style={{ borderRadius: "10px" }}>
-              <label htmlFor="username" css={labelStyle}>
+              <label htmlFor="password" css={labelStyle}>
                 Password
               </label>
               <input type="password" id="password" css={inputStyle} spellCheck={false} />
@@ -119,7 +101,7 @@ const LoginContainer: React.FC = () => {
             </button>
           </div>
         </form>
-        <div className="center-div" style={{paddingTop: "1.25em", marginBottom: "1em"}}>
+        <div className="center-div" style={{ paddingTop: "1.25em", marginBottom: "1em" }}>
           <span className="common-href-link">Create an account</span>
         </div>
       </div>

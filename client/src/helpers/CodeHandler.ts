@@ -1,6 +1,13 @@
-import FilesJSON from "../editor/files.json";
+import fs, { configureSingle } from "@zenfs/core";
+import { WebStorage } from "@zenfs/dom";
 import { setValue } from "../store/slices/CodeSlice";
 import store from "../store/store";
+await configureSingle({ backend: WebStorage, storage: localStorage });
+// const rootDir = fs.opendirSync("/");
+// console.log("rd: ", rootDir)
+const contents = fs.readdirSync("/");
+console.log("contents : ", contents);
+console.log
 interface FileData {
   value: string;
   title: string;
@@ -13,7 +20,6 @@ interface FileStructure {
 
 export default class CodeHandler {
   setStateCallback;
-  filesData: FileStructure = structuredClone(FilesJSON);
   constructor(setStateCallback: any) {
     this.setStateCallback = setStateCallback;
   }
@@ -30,12 +36,10 @@ export default class CodeHandler {
   }
 
   handleCodeChanged(value: string, filePath: string) {
-    this.filesData[filePath].value = value;
-    this.setStateCallback(this.filesData[filePath].value);
-    this.setStateCallback(value);
-    store.dispatch(
-      setValue(value),
-    );
+    store.dispatch(setValue(value));
+    fs.writeFileSync(filePath, value);
+    const contents = fs.readFileSync(filePath, "utf-8");
+    console.log(contents);
     //this.setIframeContent(value);
     return;
   }

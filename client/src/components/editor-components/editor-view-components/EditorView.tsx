@@ -4,7 +4,7 @@ import { Editor } from "@monaco-editor/react";
 import editorTheme from "../../../editor-config/editor-theme.json";
 import FileTabsContainer from "../../containers/FileTabsContainer";
 import { css } from "@emotion/react";
-import globalScriptHandler from "../../../services/globalServicePoint";
+import globalScriptHandler from "../../../helpers/globalServicePoint";
 import { useState } from "react";
 
 const editorViewStyle = css`

@@ -47,7 +47,7 @@ const ExplorerContainer: React.FC<PropTypes> = ({ project_title }) => {
   };
 
   const entries = Array.from(Object.values(store.getState().explorerState.rootDir));
-  console.log(entries);
+  console.log("file entries : ", entries);
   return (
     <div className="explorer-container">
       <div className="clickable align-row" css={explorerDetailsStyle}>
@@ -69,8 +69,9 @@ const ExplorerContainer: React.FC<PropTypes> = ({ project_title }) => {
       </div>
       <TreeView>
         {entries.map((item, index) => {
-          if (item.item_type === "folder") return <TreeFolder title={item.title} items={item?.dirEntries} img_src={item.img_src} key={index} />;
-          if (item.item_type === "file") return <TreeFile title={item.title} img_src={item.img_src} key={index} />;
+          if (item.item_type === "folder")
+            return <TreeFolder title={item.title} items={item?.dirEntries} img_src={item.img_src} path={item.path} key={index} />;
+          if (item.item_type === "file") return <TreeFile title={item.title} img_src={item.img_src} path={item.path} key={index} />;
         })}
       </TreeView>
     </div>
