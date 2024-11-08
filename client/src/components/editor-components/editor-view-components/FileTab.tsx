@@ -1,6 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import React from "react";
+import React, { useState } from "react";
+import { closeTab } from "../../../store/slices/ExplorerSlice";
+import store from "../../../store/store";
 
 const img_uri: { [type: string]: string } = {
   html: "https://img.icons8.com/fluency/48/html-5.png",
@@ -27,16 +29,15 @@ const fileTabStyle = css`
   gap: 0.25em;
   width: 150%;
   width: fit-content;
-  & :hover {  
+  & :hover {
     & > .monaco-tab-close {
       display: flex;
-      background-color:red;
+      background-color: red;
     }
   }
 `;
 
 const closeContainerStyle = css`
-  /* display: none; */
   height: 55%;
   border-radius: 5px;
   width: 1.25em;
@@ -51,6 +52,8 @@ const tabImgStyle = css`
 `;
 
 const FileTab: React.FC<PropTypes> = ({ title, tab_file_type, path }) => {
+
+  const tabCloseHandler = () => store.dispatch(closeTab(path));
   return (
     <div className="monaco-file-tab align-row clickable" key={path} css={fileTabStyle}>
       <div className="center-div">
@@ -60,7 +63,7 @@ const FileTab: React.FC<PropTypes> = ({ title, tab_file_type, path }) => {
         <span>{title}</span>
       </div>
       <div className="monaco-tab-close center-div clickable">
-        <div className="center-div" css={closeContainerStyle}>
+        <div className="center-div" css={closeContainerStyle} onClick={tabCloseHandler}>
           <img src="https://img.icons8.com/?size=100&id=NvQ7QXYyF7eO&format=png&color=FFFFFF" alt="close tab" />
         </div>
       </div>

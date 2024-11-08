@@ -6,7 +6,7 @@ interface FileProps {
   item_type: string;
   path: string;
   title: string;
-  file_type?: FILE_TYPE;
+  file_type: FILE_TYPE;
   img_src: string;
   parent_path: string;
 }
@@ -30,12 +30,20 @@ interface ItemProps {
   [key: string]: any;
 }
 
+interface TabProps {
+  title: string;
+  path: string;
+  file_type: string;
+}
+
 interface StateProps {
   rootDir: { [key: string]: ItemProps };
+  activeTabs: { [path: string]: TabProps };
 }
 
 const initialState: StateProps = {
   rootDir: {},
+  activeTabs: {},
 };
 
 const ExplorerSlice = createSlice({
@@ -58,11 +66,24 @@ const ExplorerSlice = createSlice({
       const fileItem: FileProps = { title, file_type, parent_path, path: itemPath, img_src, item_type: "file" };
       console.log("DIR: ", itemPath);
       if (!Object.keys(dir).includes(itemPath)) dir[itemPath] = fileItem;
+      state.activeTabs[itemPath] = { title, path: itemPath, file_type };
+    },
+
+    closeTab(state, { payload }) {
+      console.log(payload);
+      delete state.activeTabs[payload];
+    },
+
+    openAsTab(state, { payload }) {
+      const { path, file_type, title } = payload;
+      const fileItem = {path, file_type, title}
+      console.log(payload);
+      state.activeTabs[path] = fileItem;
     },
 
     renameFile(state, { payload }) {},
   },
 });
 
-export const { createFile, createFolder } = ExplorerSlice.actions;
+export const { createFile, createFolder, closeTab, openAsTab } = ExplorerSlice.actions;
 export default ExplorerSlice.reducer;

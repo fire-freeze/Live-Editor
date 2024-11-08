@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { modalContext } from "../../../../context/modalContext";
 import ContextMenu from "../../../modal-components/ContextMenu";
+import store from "../../../../store/store";
+import { openAsTab } from "../../../../store/slices/ExplorerSlice";
 type FILE_TYPE = "html" | "css" | "js" | "txt";
 
 const img_uri: { [type: string]: string } = {
@@ -12,6 +14,7 @@ const img_uri: { [type: string]: string } = {
 interface FilePropTypes {
   title: string;
   children?: React.ReactNode;
+  path: string;
   file_type?: string;
   img_src?: string;
 }
@@ -19,6 +22,7 @@ interface FilePropTypes {
 interface FolderPropTypes {
   title: string;
   children?: React.ReactNode;
+  path: string;
   items?: any;
   img_src: string;
 }
@@ -51,11 +55,21 @@ const ShowContextMenu = (event: React.MouseEvent, modalState: any, updateModalSt
   });
 };
 
-export const TreeFile: React.FC<FilePropTypes> = ({ title }) => {
+export const TreeFile: React.FC<FilePropTypes> = ({ title, path }) => {
   const context = useContext(modalContext);
   if (!context) throw new Error("not found");
   const file_type: string = title.split(".")[1];
   const { modalState, updateModalState } = context;
+  const clickHandler = () => {
+    store.dispatch(
+      openAsTab({
+        title,
+        path,
+        file_type
+        
+      }),
+    );
+  };
   return (
     <li>
       <div
@@ -65,12 +79,13 @@ export const TreeFile: React.FC<FilePropTypes> = ({ title }) => {
           event.preventDefault();
           ShowContextMenu(event, modalState, updateModalState, "file");
         }}
+        onClick={clickHandler}
       >
         <div className="tree-item-details clickable align-row" draggable={false}>
           <div className="tree-item-img-container align-row">
             <img height={"100%"} width={"100%"} src={img_uri[file_type]} />
           </div>
-          <span> {title}</span>
+          <span> {title} </span>
         </div>
       </div>
     </li>
@@ -102,7 +117,7 @@ export const TreeFolder: React.FC<FolderPropTypes> = ({ items, children, title, 
 
       <ul className={`${collapsed ? "collapsed" : ""}`}>
         {Object.values(items)?.map((item: any, index: number) => {
-          return <TreeFile title={item.title} img_src={item.img_src} file_type={item.file_type} key={index} />;
+          return <TreeFile title={item.title} img_src={item.img_src} file_type={item.file_type} path={item.path} key={index} />;
         })}
         {children}
       </ul>
